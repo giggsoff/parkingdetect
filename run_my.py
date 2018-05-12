@@ -38,7 +38,7 @@ def series_to_supervised(data, n_in=1, n_out=1, dropnan=True):
         agg.dropna(inplace=True)
     return agg
 
-name = 'SKOLEBAKKEN'
+name = 'BRUUNS'
 # load dataset
 dataset = read_csv('data/'+name+'.csv', header=0, index_col=0)
 dataset['Total'] = dataset.sum(axis=1)
