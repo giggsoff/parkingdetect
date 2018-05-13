@@ -12,7 +12,7 @@ def parser(x):
 
 
 name = 'SKOLEBAKKEN'
-dataset = read_csv('data/' + name + '.csv', header=None, index_col=0, parse_dates=[0], date_parser=parser)
+dataset = read_csv('data/' + name + '.csv.gz', header=None, index_col=0, parse_dates=[0], date_parser=parser)
 print(dataset.head())
 upsample = dataset.resample('10min').mean()
 print(upsample.head())
