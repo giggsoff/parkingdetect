@@ -38,21 +38,28 @@ def series_to_supervised(data, n_in=1, n_out=1, dropnan=True):
         agg.dropna(inplace=True)
     return agg
 
-name = 'BRUUNS'
+#name = 'BRUUNS'
+#name = 'BUSGADEHUSET'
+#name = 'KALKVAERKSVEJ'
+#name = 'MAGASIN'
+#name = 'NORREPORT'
+#name = 'SALLING'
+#name = 'SCANDCENTER'
+name = 'SKOLEBAKKEN'
 # load dataset
-dataset = read_csv('data/'+name+'.csv', header=0, index_col=0)
-dataset['Total'] = dataset.sum(axis=1)
+dataset = read_csv('prepared/'+name+'.csv.gz', header=None, index_col=0)
+#dataset['Total'] = dataset.sum(axis=1)
 values = dataset.values
 # integer encode direction
 encoder = LabelEncoder()
-values[:, 4] = encoder.fit_transform(values[:, 4])
+values[:, -1] = encoder.fit_transform(values[:, -1])
 # ensure all data is float
 values = values.astype('float32')
 # normalize features
 scaler = MinMaxScaler(feature_range=(0, 1))
 scaled = scaler.fit_transform(values)
 # specify the number of lag hours
-n_hours = 4
+n_hours = 5
 n_features = dataset.shape[1]
 # frame as supervised learning
 reframed = series_to_supervised(scaled, n_hours, 1)
@@ -60,7 +67,7 @@ print(reframed.shape)
 
 # split into train and test sets
 values = reframed.values
-n_train_hours = int(dataset.shape[0]/2)
+n_train_hours = int(dataset.shape[0]*2/7)
 train = values[:n_train_hours, :]
 test = values[n_train_hours:, :]
 # split into input and outputs
@@ -87,7 +94,7 @@ if my_file.is_file():
 else:
     # design network
     model = Sequential()
-    model.add(LSTM(150, input_shape=(train_X.shape[1], train_X.shape[2]),dropout=0.1,recurrent_dropout=0.1))
+    model.add(LSTM(120, input_shape=(train_X.shape[1], train_X.shape[2]),dropout=0.1,recurrent_dropout=0.1))
     model.add(Dense(1,activation='tanh'))
     model.compile(loss='mae', optimizer='adam')
     # fit network
