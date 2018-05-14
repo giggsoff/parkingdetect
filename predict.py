@@ -123,6 +123,8 @@ x = [dt.datetime.strptime(d,'%Y-%m-%d %H:%M:%S') for d in dataset.index.values[:
 #loc = plticker.MultipleLocator(base=5.0) # this locator puts ticks at regular intervals
 #pyplot.gca().xaxis.set_major_locator(loc)
 pyplot.gca().xaxis.set_major_formatter(mdates.DateFormatter('%Y-%m-%d %H:%M'))
+pyplot.ylabel('Occupying %', fontsize=16)
+pyplot.xlabel('Date', fontsize=16)
 #pyplot.gca().xaxis.set_major_locator(mdates.MinuteLocator())
 pyplot.plot(x[:300],test_X[:, -1][:300], label="real")
 pyplot.plot(x[:300],yhat[:300], label="predict")
