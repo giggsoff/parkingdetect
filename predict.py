@@ -52,8 +52,8 @@ def parser(x):
 #name = 'KALKVAERKSVEJ'
 #name = 'MAGASIN'
 #name = 'NORREPORT'
-name = 'SALLING'
-#name = 'SCANDCENTER'
+#name = 'SALLING'
+name = 'SCANDCENTER'
 #name = 'SKOLEBAKKEN'
 # load dataset
 dataset = read_csv('prepared/' + name + '.csv.gz', header=None, index_col=0)#, parse_dates=[0], date_parser=parser)
