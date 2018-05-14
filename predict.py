@@ -52,8 +52,8 @@ def parser(x):
 #name = 'KALKVAERKSVEJ'
 #name = 'MAGASIN'
 #name = 'NORREPORT'
-#name = 'SALLING'
-name = 'SCANDCENTER'
+name = 'SALLING'
+#name = 'SCANDCENTER'
 #name = 'SKOLEBAKKEN'
 # load dataset
 dataset = read_csv('prepared/' + name + '.csv.gz', header=None, index_col=0)#, parse_dates=[0], date_parser=parser)
@@ -128,7 +128,8 @@ pyplot.xlabel('Date', fontsize=16)
 #pyplot.gca().xaxis.set_major_locator(mdates.MinuteLocator())
 pyplot.plot(x[:300],test_X[:, -1][:300], label="real")
 pyplot.plot(x[:300],yhat[:300], label="predict")
-
+pyplot.axvline(dt.datetime.strptime('2014-05-23 06:30', '%Y-%m-%d %H:%M'), color='r', linestyle='--', lw=2)
+pyplot.axhline(y=0.5, color='g', linestyle='--', lw=2)
 pyplot.gcf().autofmt_xdate()
 #pyplot.plot(dataset.index.to_pydatetime(), dataset.values)
 #pyplot.plot(yhat, label="predict")
